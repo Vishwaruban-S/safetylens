@@ -1,0 +1,391 @@
+{
+ "decider_model": "strands-decider-2b-hobson-v19",
+ "rows": [
+  {
+   "i": 0,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "critical",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.7228
+    },
+    "risk_severity": {
+     "label": "medium",
+     "confidence": 0.3992
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.7604
+    }
+   },
+   "decider_ms": 4073.075800202787,
+   "decider_server_ms": 3332.5,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_a5141efaa1d240ae'}"
+  },
+  {
+   "i": 1,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "medium",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.751
+    },
+    "risk_severity": {
+     "label": "medium",
+     "confidence": 0.8002
+    },
+    "normalised_deviance": {
+     "label": "yes",
+     "confidence": 0.5326
+    }
+   },
+   "decider_ms": 3771.8630000017583,
+   "decider_server_ms": 3151.0,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_609beb3bab1a473f'}"
+  },
+  {
+   "i": 2,
+   "expected": {
+    "noise_argument_convincing": "yes",
+    "risk_severity": "low",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.5464
+    },
+    "risk_severity": {
+     "label": "low",
+     "confidence": 0.833
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.8205
+    }
+   },
+   "decider_ms": 4084.967799950391,
+   "decider_server_ms": 3375.3,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_825efdf60e68430e'}"
+  },
+  {
+   "i": 3,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "critical",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.7495
+    },
+    "risk_severity": {
+     "label": "medium",
+     "confidence": 0.391
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.7679
+    }
+   },
+   "decider_ms": 3706.0612000059336,
+   "decider_server_ms": 3118.4,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_a67018e87ed547b6'}"
+  },
+  {
+   "i": 4,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "medium",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.651
+    },
+    "risk_severity": {
+     "label": "medium",
+     "confidence": 0.6969
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.8257
+    }
+   },
+   "decider_ms": 4024.476099992171,
+   "decider_server_ms": 3370.5,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_b057c798aa6440c3'}"
+  },
+  {
+   "i": 5,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "high",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.7678
+    },
+    "risk_severity": {
+     "label": "medium",
+     "confidence": 0.549
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.7941
+    }
+   },
+   "decider_ms": 3749.0274000447243,
+   "decider_server_ms": 3118.6,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_7cc59345f7204288'}"
+  },
+  {
+   "i": 6,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "critical",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.7573
+    },
+    "risk_severity": {
+     "label": "critical",
+     "confidence": 0.4206
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.8169
+    }
+   },
+   "decider_ms": 3876.5020999126136,
+   "decider_server_ms": 3246.9,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_fa438466307348e7'}"
+  },
+  {
+   "i": 7,
+   "expected": {
+    "noise_argument_convincing": "yes",
+    "risk_severity": "low",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.5378
+    },
+    "risk_severity": {
+     "label": "low",
+     "confidence": 0.8937
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.831
+    }
+   },
+   "decider_ms": 3699.1763999685645,
+   "decider_server_ms": 3069.5,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_5080dc8d73db4574'}"
+  },
+  {
+   "i": 8,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "high",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.7375
+    },
+    "risk_severity": {
+     "label": "medium",
+     "confidence": 0.4328
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.7698
+    }
+   },
+   "decider_ms": 3758.446800056845,
+   "decider_server_ms": 3051.4,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_458ca8f489644395'}"
+  },
+  {
+   "i": 9,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "critical",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.7544
+    },
+    "risk_severity": {
+     "label": "high",
+     "confidence": 0.3325
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.755
+    }
+   },
+   "decider_ms": 3989.1383999492973,
+   "decider_server_ms": 3268.0,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_492a60b0b1ba473e'}"
+  },
+  {
+   "i": 10,
+   "expected": {
+    "noise_argument_convincing": "yes",
+    "risk_severity": "low",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "yes",
+     "confidence": 0.5013
+    },
+    "risk_severity": {
+     "label": "low",
+     "confidence": 0.8422
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.8736
+    }
+   },
+   "decider_ms": 6368.976600002497,
+   "decider_server_ms": 5721.4,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_8e67dd11c8054bc2'}"
+  },
+  {
+   "i": 11,
+   "expected": {
+    "noise_argument_convincing": "no",
+    "risk_severity": "high",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.7762
+    },
+    "risk_severity": {
+     "label": "medium",
+     "confidence": 0.7028
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.5216
+    }
+   },
+   "decider_ms": 4082.4736000504345,
+   "decider_server_ms": 3510.0,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_3e3bedf0a6784274'}"
+  },
+  {
+   "i": 12,
+   "expected": {
+    "noise_argument_convincing": "yes",
+    "risk_severity": "low",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.7902
+    },
+    "risk_severity": {
+     "label": "low",
+     "confidence": 0.7318
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.7815
+    }
+   },
+   "decider_ms": 3790.0014999322593,
+   "decider_server_ms": 3204.4,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_0be0a4dba9e84241'}"
+  },
+  {
+   "i": 13,
+   "expected": {
+    "noise_argument_convincing": "yes",
+    "risk_severity": "low",
+    "normalised_deviance": "no"
+   },
+   "decider": {
+    "noise_argument_convincing": {
+     "label": "no",
+     "confidence": 0.6222
+    },
+    "risk_severity": {
+     "label": "low",
+     "confidence": 0.7019
+    },
+    "normalised_deviance": {
+     "label": "no",
+     "confidence": 0.7898
+    }
+   },
+   "decider_ms": 3818.461599992588,
+   "decider_server_ms": 3120.6,
+   "llm_error": "NotFoundError: Error code: 404 - {'error': {'code': 'model_not_found', 'message': \"model ' '; available: qwen3.5-4b, gpt-oss-20b\", 'type': 'model_not_found'}, 'id': 'chat_fcfc5a6de8774db9'}"
+  }
+ ],
+ "summary": {
+  "decider": {
+   "accuracy": 0.7381,
+   "decisions": 42,
+   "per_question": {
+    "noise_argument_convincing": 0.7143,
+    "risk_severity": 0.5714,
+    "normalised_deviance": 0.9286
+   },
+   "latency_p50_ms": 3876.5,
+   "latency_p95_ms": 4085.0,
+   "usd_per_1k_decisions": 0.035,
+   "confident_share": 0.6667,
+   "accuracy_when_confident": 0.9286,
+   "sent_to_human_at_threshold": 14
+  },
+  "llm": {
+   "accuracy": null,
+   "decisions": 0,
+   "per_question": {},
+   "latency_p50_ms": null,
+   "latency_p95_ms": null,
+   "usd_per_1k_decisions": 0.0,
+   "confident_share": null,
+   "accuracy_when_confident": null,
+   "sent_to_human_at_threshold": 0
+  }
+ },
+ "threshold": 0.7,
+ "llm_model": " ",
+ "llm_provider": "ugmdu",
+ "llm_where": "AWS User Group Madurai cloud ( )",
+ "decider_url": "https://da25tnxy06gjk.cloudfront.net",
+ "decider_mode": "ugmdu",
+ "ran_at": 1792771580.9109898,
+ "split": "test"
+}

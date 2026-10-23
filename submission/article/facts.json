@@ -1,0 +1,96 @@
+{
+ "pattern_tag": "#guardrails",
+ "agentcore_features": [],
+ "pattern_doc": "REUSABLE DECISION PATTERN: safety-alert guardrail  (#guardrails)\n\nWhat it does\n    Before SafetyLens raises an alert, drafts a work order, or writes an evidence brief, it\n    runs a red-team/judge loop. The red-team LLM writes a one-paragraph argument that the\n    anomaly is noise (measurement drift, one-off event, already fixed). Strands Decider 2B\n    then reads both the original anomaly evidence AND the counter-argument and decides:\n\n    - noise_argument_convincing (noul): is the red-team's case strong enough to suppress?\n    - risk_severity (choice):  low / medium / high / critical\n    - normalised_deviance (noul): has the same barrier failure appeared three or more times\n      on this asset in the recent timeline, tolerated each time?\n\n    Outcome logic (in SafetyAlertGuard.before_tool_call):\n      - noise convincing AND severity low    \u00e2\u2020\u2019 suppress (Deny with logged reason)\n      - noise convincing AND severity medium \u00e2\u2020\u2019 human confirms (Confirm)\n      - noise not convincing OR severity \u00e2\u2030\u00a5 high \u00e2\u2020\u2019 raise (Proceed)\n      - normalised_deviance + severity \u00e2\u2030\u00a5 medium \u00e2\u2020\u2019 escalate immediately (Proceed + flag)\n    Below 0.60 confidence on noise_argument_convincing the decider is unsure: Confirm.\n\nTyped questions and options\n    noise_argument_convincing (noul), risk_severity (choice), normalised_deviance (noul);\n    see QUESTIONS below.\n\nWiring\n    `SafetyAlertGuard` is a Strands `InterventionHandler`; agent/agent.py passes it to\n    the Agent:\n        Agent(..., interventions=[SafetyAlertGuard(decider)])\n    It guards ALERTED_TOOLS (raise_alert, draft_work_order, send_evidence_brief).\n    Read-only tools (ingest_report, get_asset_timeline, get_risk_ledger) run untouched.\n    If the agent retries a guarded call unchanged after a Guide, the retry is denied.\n\nHow to reuse it\n    Copy this file. Replace ALERTED_TOOLS with your irreversible or high-stakes actions.\n    Reword the three questions for your domain. The red-team prompt in SafetyAlertGuard\n    can be adapted to any adversarial-checking scenario (fraud, content moderation,\n    medical triage). Thresholds are constants at the top of SafetyAlertGuard.",
+ "questions_code": "QUESTIONS = {\n    \"noise_argument_convincing\": Decider.noul(\n        \"Is the red-team's argument that this anomaly is noise convincing enough to suppress the alert?\",\n        {\n            \"true\": (\n                \"the counter-argument explains the anomaly as measurement drift, a known one-off \"\n                \"event, an already-repaired fault, or normal process variation with no safety \"\n                \"barrier failure\"\n            ),\n            \"false\": (\n                \"the anomaly involves a real barrier failure or bypass, a recurring pattern, \"\n                \"or physical evidence of degradation that the noise argument does not credibly explain\"\n            ),\n        },\n    ),\n    \"risk_severity\": Decider.choice(\n        \"What is the risk severity of this anomaly, considering both the hazard and the evidence?\",\n        {\n            \"low\": \"minor deviation, no safety barrier involved, no injury or equipment damage plausible\",\n            \"medium\": \"safety barrier partially degraded or bypassed; injury or equipment damage possible if unaddressed\",\n            \"high\": \"safety barrier failed or absent; injury, fire, or significant equipment damage likely without action\",\n            \"critical\": \"imminent risk of catastrophic failure, multi-person injury, or regulatory shutdown\",\n        },\n    ),\n    \"normalised_deviance\": Decider.noul(\n        \"Does the asset timeline show the same barrier failure or safety bypass tolerated three or more times?\",\n        {\n            \"true\": \"the same failure mode appears repeatedly across different shifts or weeks, each time without corrective action\",\n            \"false\": \"this appears to be an isolated event with no clear repeated pattern on this asset\",\n        },\n    ),\n}",
+ "agent_md": "# SafetyLens \u00e2\u20ac\u201d Factory Safety Anomaly Detection Agent\n\n- **Pitch:** An AI safety analyst that ingests factory near-miss reports and maintenance logs,\n  detects normalised deviance, red-team argues every alert, and Strands Decider 2B judges\n  whether to raise or suppress it \u00e2\u20ac\u201d then drafts a work order and evidence brief.\n- **Who it is for:** Safety managers, plant engineers and operations leads at small and\n  mid-size factories that cannot afford enterprise safety software.\n- **Features:**\n  - Ingest messy near-miss reports and maintenance notes and extract structured events\n    (asset, hazard, which safety barrier failed or was bypassed).\n  - Build a per-asset anomaly timeline and detect normalised deviance (same anomaly\n    tolerated repeatedly).\n  - Red-team agent argues the finding is noise; Strands Decider 2B is the guardrail judge\n    that decides whether to raise the alert, suppress it, or escalate to a human.\n  - Draft a work order and one-page evidence brief with every claim linked to its source.\n  - Ignored Warnings Ledger: every open risk, how long it has been open, and its cost\n    exposure \u00e2\u20ac\u201d the screen CEOs remember.\n  - Deployed on Amazon Bedrock AgentCore Runtime.\n- **The decision handed to Strands Decider 2B:** given the anomaly evidence AND the\n  red-team's noise argument, is the alert signal strong enough to raise, or is the noise\n  argument convincing enough to suppress? Also: how severe is the risk, and is this a\n  case of normalised deviance? (`#guardrails`)\n- **Why a decision model:** the red-team/judge loop runs on every anomaly, so it must be\n  fast, cheap and consistent. The decider reads the evidence text and the counter-argument\n  and returns calibrated probabilities the code can branch on, without the cost or\n  latency of a second LLM call.\n- **Amazon Bedrock:** the conversation, report ingestion and text generation\n  (Amazon Nova Pro by default).\n",
+ "llm_provider_local_runs": "ugmdu",
+ "agent_name": "SafetyLens",
+ "bench": {
+  "summary": {
+   "decider": {
+    "accuracy": 0.7381,
+    "decisions": 42,
+    "per_question": {
+     "noise_argument_convincing": 0.7143,
+     "risk_severity": 0.5714,
+     "normalised_deviance": 0.9286
+    },
+    "latency_p50_ms": 3876.5,
+    "latency_p95_ms": 4085.0,
+    "usd_per_1k_decisions": 0.035,
+    "confident_share": 0.6667,
+    "accuracy_when_confident": 0.9286,
+    "sent_to_human_at_threshold": 14
+   },
+   "llm": {
+    "accuracy": null,
+    "decisions": 0,
+    "per_question": {},
+    "latency_p50_ms": null,
+    "latency_p95_ms": null,
+    "usd_per_1k_decisions": 0.0,
+    "confident_share": null,
+    "accuracy_when_confident": null,
+    "sent_to_human_at_threshold": 0
+   }
+  },
+  "decider_model": "strands-decider-2b-hobson-v19",
+  "decider_mode": "ugmdu",
+  "llm_model": " ",
+  "cases": 14,
+  "split": "test",
+  "threshold": 0.7
+ },
+ "bench_table": "Decider: strands-decider-2b-hobson-v19 (ugmdu). 14 labelled cases, 42 decisions.\n\n| | Strands Decider 2B |   |\n|---|---|---|\n| Accuracy | 73.8% | - |\n| Latency p50 per decision | 3876 ms | - |\n| Latency p95 | 4085 ms | - |\n| Cost per 1,000 decisions | $0.0350 | $0.0000 |\n| Answered alone at confidence >= 0.7 | 67% | - |\n| Accuracy when confident | 92.9% | - |\n",
+ "demo_turns": [
+  {
+   "user": "My headphones are broken, I want my money back.",
+   "reply": "Please provide the order ID for the headphones so I can process your refund.",
+   "decisions": [
+    {
+     "pattern": "#guardrails",
+     "tool": "refund_order",
+     "args": {
+      "amount": 249.0,
+      "order_id": "A1002"
+     },
+     "args_grounded": 0.437,
+     "explicit_request": 0.791,
+     "premature": 0.235,
+     "decider_ms": 3075,
+     "verdict": "guide"
+    }
+   ],
+   "latency_ms": 6970
+  },
+  {
+   "user": "It's order A1002, refund the full amount please.",
+   "reply": "Your refund for order A1002 has been processed. You will receive 249.0 back to your original payment method. If you have any further questions, feel free to ask.",
+   "decisions": [
+    {
+     "pattern": "#guardrails",
+     "tool": "refund_order",
+     "args": {
+      "amount": 249,
+      "order_id": "A1002"
+     },
+     "args_grounded": 0.608,
+     "explicit_request": 0.894,
+     "premature": 0.128,
+     "decider_ms": 3894,
+     "verdict": "proceed"
+    }
+   ],
+   "latency_ms": 5813
+  },
+  {
+   "user": "Is it possible to cancel an order after it ships?",
+   "reply": "Once an order has shipped, it cannot be cancelled. However, you can still request a refund after receiving the item. If you have any further questions, feel free to ask.",
+   "decisions": [],
+   "latency_ms": 940
+  }
+ ],
+ "repo_url": "",
+ "video_url": ""
+}

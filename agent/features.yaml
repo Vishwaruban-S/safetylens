@@ -1,0 +1,18 @@
+# Amazon Bedrock AgentCore features for SafetyLens.
+# `./kit deploy` adds what is enabled to deploy/agentcore/agentcore.json.
+# SafetyLens uses neither Memory nor Gateway in its initial version.
+
+memory:
+  enabled: false
+  name: agentmemory
+  strategies: [SEMANTIC, USER_PREFERENCE]
+  expiry_days: 30
+
+gateway:
+  enabled: false
+  name: tools
+  authorizer: AWS_IAM
+  targets:
+    - name: websearch
+      type: connector
+      connector: web-search
